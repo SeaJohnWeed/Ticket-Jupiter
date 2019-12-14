@@ -1,0 +1,5 @@
+package com.laioffer.jiangke.rpc;
+
+public class ItemHistory {
+
+}

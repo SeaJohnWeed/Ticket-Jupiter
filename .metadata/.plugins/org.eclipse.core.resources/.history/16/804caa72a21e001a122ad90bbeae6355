@@ -1,0 +1,11 @@
+package recommendation;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import entity.Item;
+
+public class GeoRecommendation {
+	List<Item> recommendedItems = new ArrayList<>();
+	
+}

@@ -1,0 +1,35 @@
+package recommendation;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import db.MySQLConnection;
+import entity.Item;
+
+public class GeoRecommendation {
+	
+	public List<Item> recommendItems(String userId, double lat, double lon) {
+		List<Item> recommendedItems = new ArrayList<>();
+		// Step 1, get all favorited itemids
+		MySQLConnection connection = new MySQLConnection();
+		Set<String> favoritedItemIds = connection.getFavoriteItemIds(userId);
+
+		// Step 2, get all categories, sort by count
+		// {"sports": 5, "music": 3, "art": 2}
+		Map<String, Integer> allCategories = new HashMap<>();
+		for (String itemId : favoritedItemIds) {
+			Set<String> categories = connection.getCategories(itemId);
+			for (String category : categories) {
+				allCategories.put(category, allCategories.getOrDefault(category, 0) + 1);
+			}
+		}
+		connection.close();
+
+		
+		return recommendedItems;	
+	}
+	
+}
